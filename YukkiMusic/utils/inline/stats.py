@@ -110,10 +110,10 @@ def stats_buttons(_, status):
         [
             sudo if status else not_sudo,
             [
-                InlineKeyboardButton(
-                    text=_["CLOSE_BUTTON"],
-                    callback_data="close",
-                ),
+            InlineKeyboardButton(
+                text= "OCTO DUYURU 🐙",
+                url=f"https://t.me/octopus_game",
+            ),
             ],
         ]
     )
