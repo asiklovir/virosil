@@ -40,6 +40,7 @@ HELP_COMMAND = get_command("HELP_COMMAND")
 async def helper_private(
     client: app, update: Union[types.Message, types.CallbackQuery]
 ):
+
     is_callback = isinstance(update, types.CallbackQuery)
     if is_callback:
         try:
@@ -80,6 +81,19 @@ async def helper_private(
 )
 @LanguageStart
 async def help_com_group(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     keyboard = private_help_panel(_)
     await message.reply_text(
         _["help_2"], reply_markup=InlineKeyboardMarkup(keyboard)
