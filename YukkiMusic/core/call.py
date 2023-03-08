@@ -47,7 +47,7 @@ from YukkiMusic.utils.thumbnails import gen_thumb
 
 autoend = {}
 counter = {}
-AUTO_END_TIME = 3
+AUTO_END_TIME = 5
 
 
 async def _clear_(chat_id):
@@ -217,7 +217,7 @@ class Call(PyTgCalls):
                 except UserAlreadyParticipant:
                     pass
                 except Exception as e:
-                    raise AssistantErr(_["call_3"].format(e))
+                    raise AssistantErr(_["call_3"].format(userbot.username, e))
             else:
                 try:
                     try:
@@ -295,15 +295,15 @@ class Call(PyTgCalls):
                 )
             except Exception as e:
                 raise AssistantErr(
-                    "**No Active Voice Chat Found**\n\nPlease make sure group's voice chat is enabled. If already enabled, please end it and start fresh voice chat again and if the problem continues, try /restart"
+                    "**Aktif Sesli Sohbet Bulunamadı**\nLütfen üyeler kısmına girip sağ üst köşedeki üç noktadan sesli sohbet açın.\n\nAktif Sesli Sohbet Olduğunu Düşünüyorsanız /restart Komutunu Kullanıp Sesli Sohbeti Kapatıp Yeniden Açın."
                 )
         except AlreadyJoinedError:
             raise AssistantErr(
-                "**Assistant Already in Voice Chat**\n\nSystems have detected that assistant is already there in the voice chat, this issue generally comes when you play 2 queries together.\n\nIf assistant is not present in voice chat, please end voice chat and start fresh voice chat again and if the  problem continues, try /restart"
+                "**Assistan Zaten Sesli Sohbette**\n\nBu Sorun Genelde Aynı Anda İki Kere Oynat Komutunun Yazılmasıyla Oluyor.\n\nBir Sorun Olduğunu Düşünüyorsanız /restart Komutunu Kullanıp Sesli Sohbeti Kapatıp Yeniden Açın."
             )
         except TelegramServerError:
             raise AssistantErr(
-                "**Telegram Server Error**\n\nTelegram is having some internal server problems, Please try playing again.\n\n If this problem keeps coming everytime, please end your voice chat and start fresh voice chat again."
+                "**Telegram Server Hatası**\n\nLütfen Bu Mesajı Hemen @OctopusGameSahip Hesabına Gönderin Reset Atsın!!!"
             )
         await add_active_chat(chat_id)
         await mute_off(chat_id)
@@ -383,8 +383,9 @@ class Call(PyTgCalls):
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        user,
+                        title[:54],
                         f"https://t.me/{app.username}?start=info_{videoid}",
+                        user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -433,8 +434,9 @@ class Call(PyTgCalls):
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        user,
+                        title[:54],
                         f"https://t.me/{app.username}?start=info_{videoid}",
+                        user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -520,8 +522,9 @@ class Call(PyTgCalls):
                         original_chat_id,
                         photo=img,
                         caption=_["stream_1"].format(
-                            user,
+                            title[:54],
                             f"https://t.me/{app.username}?start=info_{videoid}",
+                            user,
                         ),
                         reply_markup=InlineKeyboardMarkup(button),
                     )
