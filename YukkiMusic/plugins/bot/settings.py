@@ -53,6 +53,19 @@ SETTINGS_COMMAND = get_command("SETTINGS_COMMAND")
 )
 @language
 async def settings_mar(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     buttons = setting_markup(_)
     await message.reply_text(
         _["setting_1"].format(message.chat.title, message.chat.id),
