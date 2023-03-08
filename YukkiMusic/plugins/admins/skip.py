@@ -35,6 +35,20 @@ SKIP_COMMAND = get_command("SKIP_COMMAND")
 )
 @AdminRightsCheck
 async def skip(cli, message: Message, _, chat_id):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await cli.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     if not len(message.command) < 2:
         loop = await get_loop(chat_id)
         if loop != 0:
@@ -128,8 +142,9 @@ async def skip(cli, message: Message, _, chat_id):
         run = await message.reply_photo(
             photo=img,
             caption=_["stream_1"].format(
-                user,
+                title[:54],
                 f"https://t.me/{app.username}?start=info_{videoid}",
+                user,
             ),
             reply_markup=InlineKeyboardMarkup(button),
         )
@@ -157,8 +172,9 @@ async def skip(cli, message: Message, _, chat_id):
         run = await message.reply_photo(
             photo=img,
             caption=_["stream_1"].format(
-                user,
+                title[:54],
                 f"https://t.me/{app.username}?start=info_{videoid}",
+                user,
             ),
             reply_markup=InlineKeyboardMarkup(button),
         )
@@ -215,8 +231,9 @@ async def skip(cli, message: Message, _, chat_id):
             run = await message.reply_photo(
                 photo=img,
                 caption=_["stream_1"].format(
-                    user,
+                    title[:54],
                     f"https://t.me/{app.username}?start=info_{videoid}",
+                    user,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
