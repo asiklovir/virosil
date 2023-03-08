@@ -53,6 +53,20 @@ STATS_COMMAND = get_command("STATS_COMMAND")
 )
 @language
 async def stats_global(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     upl = stats_buttons(
         _, True if message.from_user.id in SUDOERS else False
     )
@@ -71,6 +85,20 @@ async def stats_global(client, message: Message, _):
 )
 @language
 async def gstats_global(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     mystic = await message.reply_text(_["gstats_1"])
     stats = await get_global_tops()
     if not stats:
@@ -115,7 +143,7 @@ async def gstats_global(client, message: Message, _):
         vidid,
     ) = await YouTube.details(videoid, True)
     title = title.title()
-    final = f"Top Most Played Track on {MUSIC_BOT_NAME}\n\n**Title:** {title}\n\nPlayed** {co} **times"
+    final = f"**{MUSIC_BOT_NAME}'ta En Çok Oynatılan Parçalar**\n\n**Başlık:** {title}\n\nToplam** {co} **Kez Oynatıldı."
     upl = get_stats_markup(
         _, True if message.from_user.id in SUDOERS else False
     )
@@ -189,9 +217,9 @@ async def top_users_ten(client, CallbackQuery: CallbackQuery, _):
                 details = stats.get(items)
                 title = (details["title"][:35]).title()
                 if items == "telegram":
-                    msg += f"🔗[Telegram Files and Audios](https://t.me/telegram) ** played {count} times**\n\n"
+                    msg += f"🔗[Telegram Files and Audios](https://t.me/telegram) ** Toplam {count} Kez Oynattı.**\n\n"
                 else:
-                    msg += f"🔗 [{title}](https://www.youtube.com/watch?v={items}) ** played {count} times**\n\n"
+                    msg += f"🔗 [{title}](https://www.youtube.com/watch?v={items}) ** Toplam {count} Kez Oynattı.**\n\n"
 
             temp = (
                 _["gstats_4"].format(
@@ -233,7 +261,7 @@ async def top_users_ten(client, CallbackQuery: CallbackQuery, _):
             except:
                 continue
             limit += 1
-            msg += f"🔗`{extract}` played {count} times on bot.\n\n"
+            msg += f"🔗`{extract}` Toplam {count} Kez Oynattı.\n\n"
         temp = (
             _["gstats_5"].format(limit, MUSIC_BOT_NAME)
             if what == "Chats"
@@ -281,23 +309,23 @@ async def overall_stats(client, CallbackQuery, _):
     else:
         ass = "No"
     cm = config.CLEANMODE_DELETE_MINS
-    text = f"""**Bot's Stats and Information:**
+    text = f"""**🐙 Bot İstatistikleri Ve Bilgiler:**
 
-**Imported Modules:** {mod}
-**Served Chats:** {served_chats} 
-**Served Users:** {served_users} 
-**Blocked Users:** {blocked} 
-**Sudo Users:** {sudoers} 
+**Toplam Modül Sayısı:** {mod}
+**Toplam Grup Sayısı:** {served_chats} 
+**Botu Kullanan Kişi Sayısı:** {served_users} 
+**Engellenen Sayısı:** {blocked} 
+**Sudo Kullanıcıları:** {sudoers} 
     
-**Total Queries:** {total_queries} 
-**Total Assistants:** {assistant}
-**Auto Leaving Assistant:** {ass}
-**Cleanmode duration:** {cm} Mins
+**Toplam Çalma Sayısı:** {total_queries} 
+**Asistan Sayısı:** {assistant}
+**Asistan Ayrılacak Mı:** {ass}
+**Mesajları Silme Süresi:** {cm} Dk.
 
-**Play Duration Limit:** {play_duration} Mins
-**Song Download Limit:** {song} Mins
-**Bot's Server Playlist Limit:** {playlist_limit}
-**Playlist Play Limit:** {fetch_playlist}"""
+**Müzik Oynatma Limiti:** {play_duration} Dk.
+**Müzik İndirme Limiti:** {song} Dk.
+**Oynatma Listesi Limiti:** {playlist_limit}
+**Oynatma Listelerini Çalma Limiti:** {fetch_playlist}"""
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
         await CallbackQuery.edit_message_media(
@@ -366,35 +394,35 @@ async def overall_stats(client, CallbackQuery, _):
     total_queries = await get_queries()
     blocked = len(BANNED_USERS)
     sudoers = len(await get_sudoers())
-    text = f""" **Bot's Stats and Information:**
+    text = f""" **🐙 Bot İstatistikleri Ve Bilgiler:**
 
-**Imported Modules:** {mod}
+**Toplam Modül Sayısı:** {mod}
 **Platform:** {sc}
 **Ram:** {ram}
-**Physical Cores:** {p_core}
-**Total Cores:** {t_core}
-**Cpu Frequency:** {cpu_freq}
+**Fiziksel Çekirdek:** {p_core}
+**Toplam Çekirdek:** {t_core}
+**Cpu Frekansı:** {cpu_freq}
 
 **Python Version :** {pyver.split()[0]}
 **Pyrogram Version :** {pyrover}
 **Py-TgCalls Version :** {pytgver}
 
-**Storage Avail:** {total[:4]} GiB
-**Storage Used:** {used[:4]} GiB
-**Storage Left:** {free[:4]} GiB
+**Toplam Depolama Alanı:** {total[:4]} GB
+**Kullanılan Alan:** {used[:4]} GB
+**Kalan Alan:** {free[:4]} GB
 
-**Served Chats:** {served_chats} 
-**Served Users:** {served_users} 
-**Blocked Users:** {blocked} 
-**Sudo Users:** {sudoers} 
+**Toplam Grup Sayısı:** {served_chats} 
+**Botu Kullanan Kişi Sayısı:** {served_users} 
+**Engellenen Sayısı:** {blocked} 
+**Sudo Kullanıcıları:** {sudoers} 
 
-**Mongo Uptime:** {mongouptime[:4]} Days
-**Total DB Size:** {datasize[:6]} Mb
-**Total DB Storage:** {storage} Mb
-**Total DB Collections:** {collections}
-**Total DB Keys:** {objects}
-**Total DB Queries:** `{query}`
-**Total Bot Queries:** `{total_queries} `
+**Mongo Uptime:** {mongouptime[:4]} Gün
+**Toplam DB Boyutu:** {datasize[:6]} Mb
+**Toplam DB Depolama Alanı:** {storage} Mb
+**Toplam DB Koleksiyonu:** {collections}
+**Toplam DB Anahtarı:** {objects}
+**Toplam DB İşlemi:** `{query}`
+**Toplam Bot İşlemi:** `{total_queries} `
     """
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
