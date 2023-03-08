@@ -220,15 +220,6 @@ def playmode_users_markup(
     buttons = [
         [
             InlineKeyboardButton(
-                text=_["ST_B_19"], callback_data="SEARCHANSWER"
-            ),
-            InlineKeyboardButton(
-                text=_["ST_B_20"] if Direct == True else _["ST_B_21"],
-                callback_data="MODECHANGE",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
                 text=_["ST_B_22"], callback_data="AUTHANSWER"
             ),
             InlineKeyboardButton(
