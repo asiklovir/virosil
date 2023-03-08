@@ -85,9 +85,15 @@ def private_help_panel(_):
     buttons = [
         [
             InlineKeyboardButton(
-                text=_["S_B_1"],
-                url=f"https://t.me/{app.username}?start=help",
-            ),
+                text=_["S_B_8"], callback_data="settings_back_helper"
+            )
+],
+[
+       
+            InlineKeyboardButton(
+                text= "OCTO DUYURU 🐙",
+                url=f"https://t.me/octopus_game",
+            )
         ],
     ]
     return buttons
