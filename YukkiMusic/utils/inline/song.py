@@ -22,10 +22,5 @@ def song_markup(_, vidid):
                 callback_data=f"song_helper video|{vidid}",
             ),
         ],
-        [
-            InlineKeyboardButton(
-                text=_["CLOSE_BUTTON"], callback_data="close"
-            ),
-        ],
     ]
     return buttons
