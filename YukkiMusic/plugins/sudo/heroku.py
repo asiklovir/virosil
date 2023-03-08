@@ -281,7 +281,7 @@ async def update_(client, message, _):
                 try:
                     await app.send_message(
                         x,
-                        f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                        f"**{config.MUSIC_BOT_NAME} Kendini Yeniden Başlattı. Beklettiğimiz İçin Özür Dileriz.\n\nŞöyle Bi 10-15 Saniye Sonra Tekrar Başlatın.** 🐙",
                     )
                     await remove_active_chat(x)
                     await remove_active_video_chat(x)
@@ -308,14 +308,14 @@ async def update_(client, message, _):
             try:
                 await app.send_message(
                     x,
-                    f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                    f"**{config.MUSIC_BOT_NAME} Kendini Yeniden Başlattı. Beklettiğimiz İçin Özür Dileriz.\n\nŞöyle Bi 10-15 Saniye Sonra Tekrar Başlatın.** 🐙",
                 )
                 await remove_active_chat(x)
                 await remove_active_video_chat(x)
             except Exception:
                 pass
         await response.edit(
-            f"{nrs.text}\n\nBot was updated successfully! Now, wait for 1 - 2 mins until the bot reboots!"
+            f"{nrs.text}\n\nGüncelleme Başarılı! Şimdi, Bot Tamamen Başlayana Kadar 1 - 2 Dakika Bekleyin!"
         )
         os.system("pip3 install -r requirements.txt")
         os.system(f"kill -9 {os.getpid()} && bash start")
@@ -324,13 +324,27 @@ async def update_(client, message, _):
 
 @app.on_message(filters.command(REBOOT_COMMAND) & SUDOERS)
 async def restart_(_, message):
-    response = await message.reply_text("Restarting....")
+
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await app.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+    response = await message.reply_text("Restarting... 🐙")
     served_chats = await get_active_chats()
     for x in served_chats:
         try:
             await app.send_message(
                 x,
-                f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                f"**{config.MUSIC_BOT_NAME} Kendini Yeniden Başlattı. Beklettiğimiz İçin Özür Dileriz.\n\nŞöyle Bi 10-15 Saniye Sonra Tekrar Başlatın.** 🐙",
             )
             await remove_active_chat(x)
             await remove_active_video_chat(x)
@@ -346,6 +360,6 @@ async def restart_(_, message):
     except:
         pass
     await response.edit(
-        "Reboot has been initiated successfully! Wait for 1 - 2 minutes until the bot restarts."
+        "**Reboot İşlemi Başarılı! Bot Tamamen Başlayana Kadar 1 - 2 Dakika Bekle Ölmezsin.** 🐙"
     )
     os.system(f"kill -9 {os.getpid()} && bash start")
