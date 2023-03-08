@@ -29,6 +29,20 @@ RESUME_COMMAND = get_command("RESUME_COMMAND")
 )
 @AdminRightsCheck
 async def resume_com(cli, message: Message, _, chat_id):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await cli.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     if not len(message.command) == 1:
         return await message.reply_text(_["general_2"])
     if await is_music_playing(chat_id):
