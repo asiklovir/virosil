@@ -89,12 +89,16 @@ async def gen_thumb(videoid):
         name_font = ImageFont.truetype("assets/font.ttf", 30)
         para = textwrap.wrap(title, width=32)
         j = 0
+
+        draw.text(
+            (1260, 700), f"🐙", fill="white", font=name_font
+        )
         draw.text(
             (5, 5), f"{MUSIC_BOT_NAME}", fill="white", font=name_font
         )
         draw.text(
             (600, 150),
-            "NOW PLAYING",
+            "ŞİMDİ OYNATILIYOR", #NOW PLAYING
             fill="white",
             stroke_width=2,
             stroke_fill="white",
@@ -124,19 +128,19 @@ async def gen_thumb(videoid):
 
         draw.text(
             (600, 450),
-            f"Views : {views[:23]}",
+            f"İzlenme : {views[:23]}", #Views
             (255, 255, 255),
             font=arial,
         )
         draw.text(
             (600, 500),
-            f"Duration : {duration[:23]} Mins",
+            f"Uzunluk : {duration[:23]} dk", #Duration ve Mins
             (255, 255, 255),
             font=arial,
         )
         draw.text(
             (600, 550),
-            f"Channel : {channel}",
+            f"Kanal : {channel}", #Channel
             (255, 255, 255),
             font=arial,
         )
