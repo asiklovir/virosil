@@ -33,6 +33,20 @@ AUTHUSERS_COMMAND = get_command("AUTHUSERS_COMMAND")
 )
 @AdminActual
 async def auth(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text(_["general_1"])
@@ -100,6 +114,20 @@ async def auth(client, message: Message, _):
 )
 @AdminActual
 async def unauthusers(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
+
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text(_["general_1"])
@@ -138,6 +166,19 @@ async def unauthusers(client, message: Message, _):
 )
 @language
 async def authusers(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     _playlist = await get_authuser_names(message.chat.id)
     if not _playlist:
         return await message.reply_text(_["setting_5"])
