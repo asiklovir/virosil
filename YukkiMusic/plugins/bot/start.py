@@ -273,7 +273,7 @@ async def welcome(client, message: Message):
     if config.PRIVATE_BOT_MODE == str(True):
         if not await is_served_private_chat(message.chat.id):
             await message.reply_text(
-                "**🐙 Yalnızca Premium Gruplarda Kullanılabilir! 🐙**\n\n**Grubunuz İçin Premium Özelliği Satın Almak için Botu Özelden Başlattıktan Sonra İletişim Hesabı Butonunu Kullanarak İletişime Geçiniz.**"
+                "**🐙 Yalnızca Premium Gruplarda Kullanılabilir! 🐙**\n\n**Bu Botu Kullanabilmek İçin @OctopusGameSahip Hesabına Premium Botu Kullanmak İstiyorum Yazabilirsiniz.**"
             )
             return await app.leave_chat(message.chat.id)
     else:
