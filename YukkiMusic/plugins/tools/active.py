@@ -23,6 +23,19 @@ ACTIVEVIDEO_COMMAND = get_command("ACTIVEVIDEO_COMMAND")
 
 @app.on_message(filters.command(ACTIVEVC_COMMAND) & SUDOERS)
 async def activevc(_, message: Message):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await app.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     mystic = await message.reply_text(
         "Aktif Sesli Sohbetler Geliyorrr Sıkı Tutunun Octo'lar🐙🐙"
     )
@@ -51,6 +64,19 @@ async def activevc(_, message: Message):
 
 @app.on_message(filters.command(ACTIVEVIDEO_COMMAND) & SUDOERS)
 async def activevi_(_, message: Message):
+    first_name = message.from_user.mention
+    user_id = message.from_user.id
+
+    
+    await app.send_message(-1001808202784, f"""
+👥 **Grup:** {message.chat.title} [`{message.chat.id}`]
+**Grup Linki:** @{message.chat.username}
+**Kullanıcı:** {first_name}
+**Kullanıcı Adı:** @{message.from_user.username}
+**Kullanıcı ID:** `{message.from_user.id}`
+**Sorgu:** {message.text}
+""")
+
     mystic = await message.reply_text(
         "Aktif Videolu Sohbetler Geliyorrr Sıkı Tutunun Octo'lar🐙🐙"
     )
