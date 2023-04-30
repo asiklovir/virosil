@@ -7,6 +7,14 @@
 #
 # All rights reserved.
 
+import time
+
+import psutil
+
+from YukkiMusic.misc import _boot_
+
+from .formatters import get_readable_time
+
 from config import LOG, LOG_GROUP_ID
 from YukkiMusic import app
 from YukkiMusic.utils.database import is_on_off
@@ -25,6 +33,15 @@ async def play_logs(message, streamtype):
     sayı = await app.get_chat_members_count(chat_id)
     toplamgrup = len(await get_served_chats())
     aktifseslisayısı = len(await get_active_chats())
+    aktifvideosayısı = len(await get_active_video_chats())
+    bot_uptime = int(time.time() - _boot_)
+    cpu = psutil.cpu_percent(interval=0.5)
+    mem = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    CPU = f"{cpu}%"
+    RAM = f"{mem}%"
+    DISK = f"{disk}%"
+
 
     if await is_on_off(LOG):
         if message.chat.username:
@@ -42,8 +59,9 @@ async def play_logs(message, streamtype):
 **Grup Linki:** {chatusername}
 **Sorgu:** {message.text}
 
+**CPU: {CPU} 💾 RAM: {RAM}**
 **Toplam Grup Sayısı: 👉{toplamgrup}**
-**Aktif Ses: 👉{aktifseslisayısı}**"""
+**Aktif Ses: {aktifseslisayısı} 🐙 Video: {aktifvideosayısı}**"""
         if message.chat.id != LOG_GROUP_ID:
             try:
                 await app.send_message(
