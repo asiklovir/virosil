@@ -18,8 +18,10 @@ authuserdb = mongodb.authuser
 gbansdb = mongodb.gban
 sudoersdb = mongodb.sudoers
 chatsdb = mongodb.chats
+fhatsdb = mongodb.fhats
 blacklist_chatdb = mongodb.blacklistChat
 usersdb = mongodb.tgusersdb
+fusersdb = mongodb.fgusersdb
 playlistdb = mongodb.playlist
 blockeddb = mongodb.blockedusers
 privatedb = mongodb.privatechats
@@ -91,6 +93,13 @@ async def get_served_users() -> list:
     return users_list
 
 
+async def fet_served_users() -> list:
+    users_list = []
+    async for user in fusersdb.find({"user_id": {"$gt": 0}}):
+        users_list.append(user)
+    return users_list
+
+
 async def add_served_user(user_id: int):
     is_served = await is_served_user(user_id)
     if is_served:
@@ -104,6 +113,13 @@ async def add_served_user(user_id: int):
 async def get_served_chats() -> list:
     chats_list = []
     async for chat in chatsdb.find({"chat_id": {"$lt": 0}}):
+        chats_list.append(chat)
+    return chats_list
+
+
+async def fet_served_chats() -> list:
+    chats_list = []
+    async for chat in fhatsdb.find({"chat_id": {"$lt": 0}}):
         chats_list.append(chat)
     return chats_list
 
