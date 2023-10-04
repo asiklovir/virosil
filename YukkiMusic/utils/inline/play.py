@@ -61,8 +61,8 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text= "🌜 Faydalı Kanallar 🌛",
-                url=f"https://t.me/YuvaFederation/58",
+                text= "⭐️ TG HESAP SATIŞI ⭐️",
+                url=f"https://t.me/TGhesapSatisi/2",
             )
         ],
         [
@@ -141,7 +141,13 @@ def stream_markup(_, videoid, chat_id):
                 text= "BOT KOMUTLARI 🐙",
                 url=f"https://t.me/Octopus_Game/25",
             )
-        ],        
+        ],
+        [
+            InlineKeyboardButton(
+                text= "⭐️ TG HESAP SATIŞI ⭐️",
+                url=f"https://t.me/TGhesapSatisi/2",
+            )
+        ],
 [
             InlineKeyboardButton(
                 text=_["PL_B_2"],
@@ -168,7 +174,13 @@ def telegram_markup(_, chat_id):
                 text= "BOT KOMUTLARI 🐙",
                 url=f"https://t.me/Octopus_Game/25",
             )
-        ],        
+        ],
+        [
+            InlineKeyboardButton(
+                text= "⭐️ TG HESAP SATIŞI ⭐️",
+                url=f"https://t.me/TGhesapSatisi/2",
+            )
+        ],
 [
                 InlineKeyboardButton(
                 text=_["CLOSEMENU_BUTTON"], callback_data="close"
