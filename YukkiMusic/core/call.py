@@ -303,7 +303,7 @@ class Call(PyTgCalls):
             )
         except TelegramServerError:
             raise AssistantErr(
-                "**Telegram Server Hatası**\n\nLütfen Bu Mesajı Hemen @OctopusGameSahip Hesabına Gönderin Reset Atsın!!!"
+                "**Telegram Server Hatası**\n\nLütfen Botu Resetlemesi İçin @OctOwner Hesabına Haber Verin!!!\n\nBu Sorun Giderilene Kadar Aşağıdaki Botlardan Birini Kullanmayı Deneyin: \n@OctopusMuzikBot \n@MuzikFilmBot \n@KrakenMuzikBot \n@MissRoseMuzikBot"
             )
         await add_active_chat(chat_id)
         await mute_off(chat_id)
