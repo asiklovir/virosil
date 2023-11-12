@@ -142,7 +142,7 @@ cplay_6 : "Kanalı bu gruba bağlamak için[{0}] kanalın **Sahibi** olmanız ge
 #Play
 play_1 : "🔄 **Müzik İndiriliyor... Lütfen Bekleyin...** 🐙"
 play_2 : "**🏷Kanal Oynatma Modu**\n🔄 Sorgu İşleniyor... Lütfen Bekleyin!\n\n**Bağlı Kanal:** {0}"
-play_3 : "Sorgu İşlenemedi! Başka Bir Parça Oynatmayı Deneyiniz. 🐙"
+play_3 : "**BİLGİLENDİRME**\n\n**Sayın Müzik Botu Kullanıcılarımız, eğer oynat yazdığınızda bu metni görüyorsanız bot sahibi @OctOwner'in botu yeniden başlatması gerekiyor demektir.**\n\n**Peki bot yeniden başlatılana kadar müzik dinleyemeyecek miyiz?**\nElbette dinleyebileceksiniz. Oynatmak istediğiniz müziğin dosyasını gruba atın dosyayı yanıtlayarak /oynat komutunu yazın çalışır. Dosyaları tek tek indirmenize gerek yok @lybot gibi botlarla istediğiniz müziği bulup gruba atarsınız.**\n\nŞimdilik böyle ama aşağıdaki botlardan birini ekleyip deneyebilirsiniz içlerinden birisi daha stabil çalışacaktır mutlaka.\n\n@OctopusMuzikBot \n@MuzikFilmBot \n@KrakenMuzikBot \n@MissRoseMuzikBot"
 play_4 : "🖇 **Yalnızca Yöneticiler Oynatır**\nYalnızca Yöneticiler ve Yetkilendirilmiş Kullanıcılar bu grupta müzik çalabilir.\n\nModu /playmode aracılığıyla değiştirin ve zaten yöneticiyseniz, /admincache aracılığıyla admincache'i yeniden yükleyin"
 play_5 : "Ses dosyası işlenemedi.\n\nSes Dosyası Boyutu 100 mb'den Küçük Olmalı 🐙"
 play_6 : "**Süre Sınırı Aşıldı**\n\n**İzin Verilen Süre: **{0} dakika\n**Alınan Süre:** {1} dakika(s)"
